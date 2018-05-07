@@ -14,16 +14,16 @@ import com.aks.clock.utils.ClockUtils;
 
 public class ClockTemplate {
 
-    private List<Processor> processors = Arrays.asList(new LevelOneProcessor(), new LevelTwoProcessor(),
-	    new LevelThreeProcessor(), new LevelFourProcessor());
+	private List<Processor> processors = Arrays.asList(new LevelOneProcessor(), new LevelTwoProcessor(),
+			new LevelThreeProcessor(), new LevelFourProcessor());
 
-    public final String calculate(Input input) {
-	int output = 0;
-	for (Processor processor : processors) {
-	    output += processor.process(input);
+	public final String calculate(Input input) {
+		int output = 0;
+		for (Processor processor : processors) {
+			output += processor.process(input);
+		}
+		if (output > Constants.ONE_DAY)
+			throw new IllegalArgumentException("Please provide the valid input " + input);
+		return ClockUtils.convertToHourMinute(output);
 	}
-	if (output > Constants.ONE_DAY)
-	    throw new IllegalArgumentException("Please provide the valid input " + input);
-	return ClockUtils.convertToHourMinute(output);
-    }
 }
